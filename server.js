@@ -3,20 +3,21 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+console.log(process.env.MONGO_URI)
 const app = express();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: true
+}))
 
 app.get("/", (req, res) => {
   res.send("Venue backend is running!");
 });
 
+
 // MongoDB connection
-
-
 mongoose.connect(process.env.MONGO_URI).then(() => console.log('Connected to MongoDB (venue database)'))
 .catch((err) => console.error('Could not connect to MongoDB', err));
 
